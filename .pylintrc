@@ -1,0 +1,7 @@
+[REPORTS]
+include-ids = yes
+output-format = colorized
+reports = no
+
+[BASIC]
+good-names = i,j,k,ex,Run,_,f

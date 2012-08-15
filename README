@@ -1,0 +1,13 @@
+
+=============================================
+Ook - Python-version-sensitive monkeypatching
+=============================================
+
+Ook is a simple library to assist with monkeypatching Python methods and
+functions on a per-Python-version basis.
+
+Bugs
+----
+
+It needs a longer README, for a start.
+
