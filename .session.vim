@@ -14,6 +14,7 @@ bo vsplit README
 below split tests/__init__.py
 below split tests/test.py
 below split tests/decorators/__init__.py
+below split tests/decorators/examples.py
 below split tests/decorators/test.py
 below split tests/decorators/test_patch.py
 below split tests/util/__init__.py

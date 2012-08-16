@@ -11,7 +11,7 @@ from nose.tools import raises
 
 from ook.util import Version
 
-ARGUMENTS = ("inf", float("inf"), 3, 2.7, "2.6.8", Version(), (3, 1, 5))
+from tests import VERSION_ARGS
 
 
 def test_exists():
@@ -26,7 +26,7 @@ def check_instantiate(version):
 
 def test_instantiate():
     """`Version` class can be instantiated"""
-    for version in map(Version, ARGUMENTS):
+    for version in map(Version, VERSION_ARGS):
         yield check_instantiate, version
 
 
@@ -37,7 +37,7 @@ def check_repr(version):
 
 def test_repr():
     """`Version` instances have sensible `repr` values"""
-    for version in map(Version, ARGUMENTS):
+    for version in map(Version, VERSION_ARGS):
         yield check_repr, version
 
 
@@ -55,7 +55,7 @@ def check_mmm(version, index, attr):
 def test_mmm():
     """`Version` instances have sensible `major`|`minor`|`micro` attributes"""
     attrs = ("major", "minor", "micro")
-    for version in map(Version, ARGUMENTS):
+    for version in map(Version, VERSION_ARGS):
         for index, attr in enumerate(getattr(version, a) for a in attrs):
             yield check_mmm, version, index, attr
 
@@ -67,8 +67,8 @@ def check_compare(oper, ver1, ver2):
 
 def test_compare():
     """``Version` instances compare as expected"""
-    for ver1 in map(Version, ARGUMENTS):
-        for ver2 in map(Version, ARGUMENTS):
+    for ver1 in map(Version, VERSION_ARGS):
+        for ver2 in map(Version, VERSION_ARGS):
             for oper in (eq, ge, gt, le, lt, ne):
                 yield check_compare, oper, ver1, ver2
 
@@ -81,9 +81,9 @@ def check_compare_unorderable(oper, version, nonversion):
 
 def test_compare_unorderable():
     """Comparing `Version` instances against non-`Version`s fails"""
-    for nonversion in ARGUMENTS:
+    for nonversion in VERSION_ARGS:
         if isinstance(nonversion, Version):
             continue
-        for version in map(Version, ARGUMENTS):
+        for version in map(Version, VERSION_ARGS):
             for oper in (ge, gt, le, lt):
                 yield check_compare_unorderable, oper, version, nonversion
