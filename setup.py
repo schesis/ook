@@ -4,21 +4,20 @@
 
 from setuptools import setup
 
-import ook
-
 
 setup(
     name="ook",
     author="Zero Piraeus",
     author_email="z@etiol.net",
-    description=ook.__doc__,
+    description=open("ook/__init__.py").readlines()[0].strip('"\n'),
+    install_requires=["six"],
     keywords="version sensitive monkey patch",
     license="GPLv3",
     long_description=open("README").read(),
     packages=["ook"],
     setup_requires=["setuptools_hg"],
     url="https://bitbucket.org/schesis/ook",
-    version=ook.__version__,
+    version=open("ook/_version.py").readlines()[-1].split()[-1].strip("\"'"),
     classifiers=(
         "Development Status :: 2 - Pre-Alpha",
         "Environment :: Plugins",

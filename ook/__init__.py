@@ -1,3 +1,8 @@
 """Python-version-sensitive monkeypatching."""
 
-__version__ = "0.12.08a1"
+from ook.decorators import patch
+from ook._version import __version__
+
+__all__ = (
+    patch,
+)

@@ -5,3 +5,4 @@ reports = no
 
 [BASIC]
 good-names = i,j,k,ex,Run,_,f
+bad-functions=apply,input
