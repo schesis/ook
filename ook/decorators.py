@@ -9,7 +9,7 @@ PY_VERSION = Version()
 
 def patch(scope, *args, **kwargs):
     """Monkeypatch a function or method for specified Python versions."""
-    versions = tuple(map(Version, *args))
+    versions = tuple(map(Version, args))
     min_version = Version(kwargs.get("min", MIN_VERSION))
     max_version = Version(kwargs.get("max", MAX_VERSION))
     matches = (PY_VERSION in versions)
