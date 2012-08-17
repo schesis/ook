@@ -65,18 +65,21 @@ def test_no_args():
     assert tests.decorators.examples.example() is None
 
 
-def check_version_args(*args):
+def check_version_args(kwargs, *args):
     """`ook.patch` function respects version arguments"""
     reload(tests.decorators.examples)
 
-    @patch(tests.decorators.examples, *args)
+    @patch(tests.decorators.examples, *args, **kwargs)
     def example():
-        """Return a version argument."""
-        return args
+        """Return version arguments."""
+        return args, kwargs
 
-    if PY_VERSION in map(Version, args):
+    ge_min = ("min" not in kwargs) or (PY_VERSION >= Version(kwargs["min"]))
+    le_max = ("max" not in kwargs) or (PY_VERSION <= Version(kwargs["max"]))
+    matches_specified = (not args) or (PY_VERSION in map(Version, args))
+    if matches_specified and ge_min and le_max:
         assert tests.decorators.examples.example == example
-        assert tests.decorators.examples.example() == args
+        assert tests.decorators.examples.example() == (args, kwargs)
     else:
         assert tests.decorators.examples.example != example
         assert tests.decorators.examples.example() == "undecorated"
@@ -84,7 +87,12 @@ def check_version_args(*args):
 
 def test_version_args():
     """`ook.patch` function respects groups of version arguments"""
-    for nargs in range(1, len(VERSION_ARGS) + 1):
+    for nargs in range(len(VERSION_ARGS) + 1):
         # pylint: disable=E1101
         for args in itertools.combinations(VERSION_ARGS, nargs):
-            yield (check_version_args,) + tuple(args)
+            kwargs = {}
+            for keys in ([], ["min"], ["max"], ["min", "max"]):
+                for key in keys:
+                    for value in VERSION_ARGS:
+                        kwargs[key] = value
+                yield (check_version_args, kwargs) + tuple(args)
