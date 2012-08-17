@@ -11,8 +11,6 @@ functions on a per-Python-version basis. It provides one decorator, ``patch``,
 which conditionally patches callables depending on which version of Python is
 running.
 
-.. contents:: Contents
-
 
 Example
 -------
@@ -68,9 +66,9 @@ formats::
         """Do something."""
         pass
 
-.. Note:: If you specify both keyword and non-keyword version arguments, the
-   patch will only take effect if both the explicitly specified versions and
-   the implied ranges are satisfied.
+**Note**: If you specify both keyword and non-keyword version arguments, the
+patch will only take effect if both the explicitly specified versions and the
+implied version ranges are satisfied.
 
 With no arguments other than the module or class to be patched, ``patch``
 applies the patch regardless of Python version::
