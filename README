@@ -6,10 +6,10 @@ ook - Python-version-sensitive monkeypatching
 :Author: Zero Piraeus
 :Contact: z@etiol.net
 
-`ook` is a simple library to assist with monkeypatching Python methods and
-functions on a per-Python-version basis. It provides one decorator, `patch`,
-which conditionally patches callables depending on which version of Python
-is running.
+**ook** is a simple library to assist with monkeypatching Python methods and
+functions on a per-Python-version basis. It provides one decorator, ``patch``,
+which conditionally patches callables depending on which version of Python is
+running.
 
 .. contents:: Contents
 
@@ -17,7 +17,7 @@ is running.
 Example
 -------
 
-This one's used in `ook`'s test suite::
+This one's used in **ook**'s test suite::
 
     import itertools
     from ook import patch
@@ -46,7 +46,7 @@ This one's used in `ook`'s test suite::
 Usage
 -----
 
-`patch` accepts an arbitrary number of version arguments, in a variety of
+``patch`` accepts an arbitrary number of version arguments, in a variety of
 formats::
 
     @patch(some.module.or.class, 2.5, "2.6.8", (2, 7, 3), 3):
@@ -54,7 +54,7 @@ formats::
         """Do something."""
         pass
 
-... as well as `min` and `max` keyword arguments::
+... as well as ``min`` and ``max`` keyword arguments::
 
     @patch(some.module.or.class, min="2.5.4", max=2.7):
     def method_or_function(signature):
@@ -70,10 +70,10 @@ formats::
 
 .. Note:: If you specify both keyword and non-keyword version arguments, the
    patch will only take effect if both the explicitly specified versions and
-   the implied ranges are satisfied).
+   the implied ranges are satisfied.
 
-With no arguments other than the module or class to be patched, `patch` applies
-the patch regardless of Python version::
+With no arguments other than the module or class to be patched, ``patch``
+applies the patch regardless of Python version::
 
     @patch(some.module.or.class):
     def method_or_function(signature):
@@ -92,12 +92,12 @@ This should do the trick::
 Credits / Copyright
 -------------------
 
-`ook` was (cough) "inspired" by Guido van Rossum's `monkeypatch_method`[1]_
-recipe. Thanks, Guido :-)
+**ook** was (cough) "inspired" by Guido van Rossum's monkeypatch_ recipe.
+Thanks, Guido :-)
 
 It's released under the GNU General Public License (version 3 or later), a copy
-of which is included with this distribution in the file "COPYING".
+of which is included with this distribution in the file **COPYING**.
 
 
-.. [1] http://mail.python.org/pipermail/python-dev/2008-January/076194.html
+.. _monkeypatch: http://mail.python.org/pipermail/python-dev/2008-January/076194.html
 
