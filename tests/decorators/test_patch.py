@@ -52,19 +52,6 @@ def test_undecorated():
     assert tests.decorators.examples.example() == "undecorated"
 
 
-def test_no_args():
-    """`ook.patch` function replaces existing `example` fuinction"""
-    reload(tests.decorators.examples)
-
-    @patch(tests.decorators.examples)
-    def example():
-        """Do nothing."""
-        pass
-
-    assert tests.decorators.examples.example == example
-    assert tests.decorators.examples.example() is None
-
-
 def check_version_args(kwargs, *args):
     """`ook.patch` function respects version arguments"""
     reload(tests.decorators.examples)
