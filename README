@@ -47,21 +47,21 @@ Usage
 ``patch`` accepts an arbitrary number of version arguments, in a variety of
 formats::
 
-    @patch(some.module.or.class, 2.5, "2.6.8", (2, 7, 3), 3):
+    @patch(some.module.or.class, 2.5, "2.6.8", (2, 7, 3), 3)
     def method_or_function(signature):
         """Do something."""
         pass
 
 ... as well as ``min`` and ``max`` keyword arguments::
 
-    @patch(some.module.or.class, min="2.5.4", max=2.7):
+    @patch(some.module.or.class, min="2.5.4", max=2.7)
     def method_or_function(signature):
         """Do something."""
         pass
 
 ... which can be combined::
 
-    @patch(some.module.or.class, "3.1.5", max=3.1):
+    @patch(some.module.or.class, "3.1.5", max=3.1)
     def method_or_function(signature):
         """Do something."""
         pass
@@ -73,7 +73,7 @@ implied version ranges are satisfied.
 With no arguments other than the module or class to be patched, ``patch``
 applies the patch regardless of Python version::
 
-    @patch(some.module.or.class):
+    @patch(some.module.or.class)
     def method_or_function(signature):
         """Do something, no matter what."""
         pass
