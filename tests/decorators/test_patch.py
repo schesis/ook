@@ -18,29 +18,6 @@ import tests.decorators.examples
 from tests import VERSION_ARGS
 
 
-@patch(itertools, 2.5)
-def combinations(iterable, r):  # pylint: disable=C0103
-    """Return successive r-length combinations of elements in the iterable."""
-    # From <http://docs.python.org/release/2.6/library/itertools.html>.
-    # Yes, I'm using `ook.patch()` to test itself. Meta, no?
-    pool = tuple(iterable)
-    n = len(pool)  # pylint: disable=C0103
-    if r > n:
-        return
-    indices = range(r)
-    yield tuple(pool[i] for i in indices)
-    while True:
-        for i in reversed(range(r)):
-            if indices[i] != i + n - r:
-                break
-        else:
-            return
-        indices[i] += 1  # pylint: disable=W0631
-        for j in range(i + 1, r):  # pylint: disable=W0631
-            indices[j] = indices[j - 1] + 1
-        yield tuple(pool[i] for i in indices)
-
-
 def test_exists():
     """`ook.patch` function exists"""
     assert isinstance(patch, FunctionType)

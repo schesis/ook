@@ -15,30 +15,15 @@ running.
 Example
 -------
 
-This one's used in **ook**'s test suite::
-
     import itertools
     from ook import patch
 
-    @patch(itertools, 2.5)
-    def combinations(iterable, r):
-        # From <http://docs.python.org/release/2.6/library/itertools.html>.
-        pool = tuple(iterable)
-        n = len(pool)
-        if r > n:
-            return
-        indices = range(r)
-        yield tuple(pool[i] for i in indices)
-        while True:
-            for i in reversed(range(r)):
-                if indices[i] != i + n - r:
-                    break
-            else:
-                return
-            indices[i] += 1
-            for j in range(i+1, r):
-                indices[j] = indices[j-1] + 1
-            yield tuple(pool[i] for i in indices)
+    # http://docs.python.org/2.7/library/itertools.html#itertools.compress
+
+    @patch(itertools, 2.6)
+    def compress(data, selectors):
+        # compress('ABCDEF', [1,0,1,0,1,1]) --> A C E F
+        return (d for d, s in itertools.izip(data, selectors) if s)
 
 
 Usage
@@ -47,21 +32,21 @@ Usage
 ``patch`` accepts an arbitrary number of version arguments, in a variety of
 formats::
 
-    @patch(some.module.or.class, 2.5, "2.6.8", (2, 7, 3), 3)
+    @patch(some.module.or.class, 2.7, "2.6.8", (3, 2, 5), 3)
     def method_or_function(signature):
         """Do something."""
         pass
 
 ... as well as ``min`` and ``max`` keyword arguments::
 
-    @patch(some.module.or.class, min="2.5.4", max=2.7)
+    @patch(some.module.or.class, min="2.6.5", max=2.7)
     def method_or_function(signature):
         """Do something."""
         pass
 
 ... which can be combined::
 
-    @patch(some.module.or.class, "3.1.5", max=3.1)
+    @patch(some.module.or.class, "3.2.5", max=3.2)
     def method_or_function(signature):
         """Do something."""
         pass

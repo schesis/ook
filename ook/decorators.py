@@ -2,7 +2,7 @@
 
 from ook.util import Version
 
-MIN_VERSION = Version(2.5)
+MIN_VERSION = Version(2.6)
 MAX_VERSION = Version("inf")
 PY_VERSION = Version()
 
