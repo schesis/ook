@@ -7,4 +7,3 @@ syntax: regexp
 ^\.tox/
 ^dist/
 (^|/)\.coverage$
-
