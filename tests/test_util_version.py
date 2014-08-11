@@ -7,7 +7,7 @@ from operator import le
 from operator import lt
 from operator import ne
 
-from nose.tools import raises
+import pytest
 
 from ook.util import Version
 
@@ -73,10 +73,10 @@ def test_compare():
                 yield check_compare, oper, ver1, ver2
 
 
-@raises(TypeError)
 def check_compare_unorderable(oper, version, nonversion):
     """Comparing `Version` instance against non-`Version` fails"""
-    oper(version, nonversion)
+    with pytest.raises(TypeError):
+        oper(version, nonversion)
 
 
 def test_compare_unorderable():

@@ -1,6 +1,6 @@
 """Examples for `tests.decorators`."""
 
 
-def example():
+def basic():
     """Return a string."""
     return "undecorated"

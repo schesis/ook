@@ -13,7 +13,7 @@ from ook import patch
 from ook.decorators import PY_VERSION
 from ook.util import Version
 
-import tests.decorators.examples
+import tests.examples
 
 from tests import VERSION_ARGS
 
@@ -24,17 +24,17 @@ def test_exists():
 
 
 def test_undecorated():
-    """`tests.decorators.examples.example()` returns 'undecorated'"""
-    reload(tests.decorators.examples)
-    assert tests.decorators.examples.example() == "undecorated"
+    """`tests.examples.basic()` returns 'undecorated'"""
+    reload(tests.examples)
+    assert tests.examples.basic() == "undecorated"
 
 
 def check_version_args(kwargs, *args):
     """`ook.patch` function respects version arguments"""
-    reload(tests.decorators.examples)
+    reload(tests.examples)
 
-    @patch(tests.decorators.examples, *args, **kwargs)
-    def example():
+    @patch(tests.examples, *args, **kwargs)
+    def basic():
         """Return version arguments."""
         return args, kwargs
 
@@ -42,11 +42,11 @@ def check_version_args(kwargs, *args):
     le_max = ("max" not in kwargs) or (PY_VERSION <= Version(kwargs["max"]))
     matches_specified = (not args) or (PY_VERSION in map(Version, args))
     if matches_specified and ge_min and le_max:
-        assert tests.decorators.examples.example == example
-        assert tests.decorators.examples.example() == (args, kwargs)
+        assert tests.examples.basic == basic
+        assert tests.examples.basic() == (args, kwargs)
     else:
-        assert tests.decorators.examples.example != example
-        assert tests.decorators.examples.example() == "undecorated"
+        assert tests.examples.basic != basic
+        assert tests.examples.basic() == "undecorated"
 
 
 def test_version_args():
