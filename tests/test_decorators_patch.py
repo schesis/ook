@@ -7,8 +7,6 @@ except NameError:
 
 import itertools
 
-from types import FunctionType
-
 from ook import patch
 from ook.decorators import PY_VERSION
 from ook.util import Version
@@ -16,11 +14,6 @@ from ook.util import Version
 import tests.examples
 
 from tests import VERSION_ARGS
-
-
-def test_exists():
-    """`ook.patch` function exists"""
-    assert isinstance(patch, FunctionType)
 
 
 def test_undecorated():

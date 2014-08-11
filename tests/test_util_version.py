@@ -14,22 +14,6 @@ from ook.util import Version
 from tests import VERSION_ARGS
 
 
-def test_exists():
-    """`Version` class exists"""
-    assert isinstance(Version, type)
-
-
-def check_instantiate(version):
-    """`Version` class can be instantiated"""
-    assert isinstance(version, Version)
-
-
-def test_instantiate():
-    """`Version` class can be instantiated"""
-    for version in map(Version, VERSION_ARGS):
-        yield check_instantiate, version
-
-
 def check_repr(version):
     """`Version` instance has a sensible `repr` value"""
     assert repr(version) == "Version(%r)" % str(version)
