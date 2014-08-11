@@ -3,7 +3,7 @@
 try:
     reload
 except NameError:
-    from imp import reload  # pylint: disable=E0611,W0622
+    from imp import reload  # pylint: disable=redefined-builtin
 
 import itertools
 
@@ -52,7 +52,7 @@ def check_version_args(kwargs, *args):
 def test_version_args():
     """`ook.patch` function respects groups of version arguments"""
     for nargs in range(len(VERSION_ARGS) + 1):
-        # pylint: disable=E1101
+        # pylint: disable=no-member
         for args in itertools.combinations(VERSION_ARGS, nargs):
             kwargs = {}
             for keys in ([], ["min"], ["max"], ["min", "max"]):

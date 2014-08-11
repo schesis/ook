@@ -52,7 +52,7 @@ class Version(object):
             raise TypeError("unorderable types")
 
     def __ne__(self, other):
-        return not (self == other)
+        return not (self == other)  # pylint: disable=superfluous-parens
 
     def __repr__(self):
         return "%s(%r)" % (self.__class__.__name__, str(self))
