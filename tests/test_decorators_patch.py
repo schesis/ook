@@ -5,7 +5,7 @@ try:
 except NameError:
     from imp import reload  # pylint: disable=redefined-builtin
 
-import itertools
+from itertools import chain, combinations, product
 
 from ook import patch
 from ook.decorators import PY_VERSION
@@ -16,13 +16,19 @@ import tests.examples
 from tests import VERSION_ARGS
 
 
+def powerset(seq):
+    """powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"""
+    # https://docs.python.org/3/library/itertools.html#itertools-recipes
+    return chain.from_iterable(combinations(seq, r) for r in range(len(seq)+1))
+
+
 def test_undecorated():
     """`tests.examples.basic()` returns 'undecorated'"""
     reload(tests.examples)
     assert tests.examples.basic() == "undecorated"
 
 
-def check_version_args(kwargs, *args):
+def test_version_args(args, kwargs):
     """`ook.patch` function respects version arguments"""
     reload(tests.examples)
 
@@ -42,14 +48,14 @@ def check_version_args(kwargs, *args):
         assert tests.examples.basic() == "undecorated"
 
 
-def test_version_args():
-    """`ook.patch` function respects groups of version arguments"""
-    for nargs in range(len(VERSION_ARGS) + 1):
-        # pylint: disable=no-member
-        for args in itertools.combinations(VERSION_ARGS, nargs):
-            kwargs = {}
-            for keys in ([], ["min"], ["max"], ["min", "max"]):
-                for key in keys:
-                    for value in VERSION_ARGS:
-                        kwargs[key] = value
-                yield (check_version_args, kwargs) + tuple(args)
+def pytest_generate_tests(metafunc):
+    """Generate tests for `test_version_args`."""
+    argnames = ["args", "kwargs"]
+    if all(a in metafunc.funcargnames for a in argnames):
+        argvalues = []
+        for args in powerset(VERSION_ARGS):
+            for keys in powerset(["min", "max"]):
+                for values in product(VERSION_ARGS, repeat=len(keys)):
+                    kwargs = dict(zip(keys, values))
+                    argvalues.append((args, kwargs))
+        metafunc.parametrize(argnames, argvalues)
