@@ -19,7 +19,7 @@ setup(
     url="https://bitbucket.org/schesis/ook",
     version=open("ook/_version.py").readlines()[-1].split()[-1].strip("\"'"),
     classifiers=(
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Plugins",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
