@@ -7,6 +7,11 @@ MAX_VERSION = Version("inf")
 PY_VERSION = Version()
 
 
+def null_decorator(func):
+    """Return `func` unaltered."""
+    return func
+
+
 def patch(scope, *args, **kwargs):
     """Monkeypatch a function or method for specified Python versions."""
     versions = tuple(map(Version, args))
@@ -23,6 +28,6 @@ def patch(scope, *args, **kwargs):
             return func
 
     else:
-        decorator = lambda x: x
+        decorator = null_decorator
 
     return decorator
