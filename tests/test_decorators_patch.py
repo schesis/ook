@@ -1,4 +1,4 @@
-"""Tests for the `ook.decorators.patch` function."""
+"""Tests for `ook.decorators.patch`."""
 
 try:
     reload

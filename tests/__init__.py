@@ -1,4 +1,4 @@
-"""Tests for the `ook` package."""
+"""Tests for `ook`."""
 
 from ook.util import Version
 

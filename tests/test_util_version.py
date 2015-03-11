@@ -1,4 +1,4 @@
-"""Tests for the `ook.util.Version` class."""
+"""Tests for `ook.util.Version`."""
 
 from operator import eq
 from operator import ge
