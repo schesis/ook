@@ -13,7 +13,7 @@ setup(
     install_requires=["six"],
     keywords="version sensitive monkey patch",
     license="GPLv3",
-    long_description=open("README").read(),
+    long_description=open("README.rst").read(),
     packages=["ook"],
     setup_requires=["setuptools_hg"],
     url="https://bitbucket.org/schesis/ook",
