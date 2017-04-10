@@ -27,6 +27,7 @@ def test_repr():
 
 def check_mmm(version, index, attr):
     """`Version` instance has sensible `major`|`minor`|`micro` attributes"""
+    # pylint: disable=redefined-variable-type
     try:
         expected_value = int(str(version).split(".")[index])
     except IndexError:
