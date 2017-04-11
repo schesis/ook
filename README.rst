@@ -48,7 +48,7 @@ formats::
 
 ... which can be combined::
 
-    @patch(some.module.or.class, "3.2.5", max=3.2)
+    @patch(some.module.or.class, "3.3.5", max=3.3)
     def method_or_function(signature):
         """Do something."""
         pass
